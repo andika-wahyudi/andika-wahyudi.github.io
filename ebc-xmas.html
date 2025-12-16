@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Singapore MRT Line Drag & Drop</title>
+  <title>© Andika Aryo Wahyudi || Dave Keitaro Teo</title>
   <style>
+    @font-face {
+    font-family: "MyFont";
+    src: url("./fonts/MyFont.woff") format("woff");
+    font-display: swap;
+  }
+    
     :root {
       --bg: #f8fafb;
       --card: #ffffff;
@@ -17,7 +23,7 @@
       --badge: #eef2f7;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 28px; font-family: "Inter", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
+    body { margin: 0; padding: 28px; font-family: "MyFont", "Inter", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
     header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
     header h1 { margin: 0; font-size: 24px; font-weight: 700; }
     header .pill { background: var(--badge); color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
@@ -42,7 +48,7 @@
     .chip:active { cursor: grabbing; transform: scale(0.98); }
     .chip.locked { cursor: not-allowed; opacity: 0.7; }
     .chip.flying { position: fixed; pointer-events: none; z-index: 2000; transform: translate(-50%, -50%); box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18); opacity: 0.96; }
-    .pool-label { color: #0ea5e9; font-weight: 700; margin: 0 0 8px; font-size: 13px; }
+    .pool-label { color: #000000; font-weight: 700; margin: 0 0 8px; font-size: 13px; }
     .pool { display: flex; flex-wrap: wrap; gap: 10px; }
     .status { display: grid; gap: 8px; margin-top: 12px; }
     .status-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
@@ -68,8 +74,8 @@
 </head>
 <body>
   <header>
-    <h1>Singapore MRT Line Match</h1>
-    <div class="pill">Pick a line, then drag stations into the slots</div>
+    <h1>What's The MRT?</h1>
+    <div class="pill">EBC Christmas Game</div>
   </header>
 
   <div class="card">
@@ -83,7 +89,6 @@
         <option value="dt">Downtown Line (DT)</option>
         <option value="te">Thomson–East Coast Line (TE)</option>
       </select>
-      <button id="resetBtn">Reset line</button>
       <button id="submitBtn">Submit</button>
     </div>
 
@@ -93,8 +98,8 @@
       <div class="board-title">
         <div>
           <div id="lineTitle" style="font-size:18px; font-weight:800;"></div>
-          <div style="color:#0ea5e9; font-size:13px; font-weight:700; margin-top:4px;">
-            Drag stations into the slots. (Line between boxes shown for illustration.)
+          <div style="color:#000000; font-size:13px; font-weight:700; margin-top:4px;">
+            Drag stations into the slots.
           </div>
         </div>
         <span class="line-badge" id="lineBadge"></span>
@@ -106,23 +111,6 @@
 
       <div class="pool-label">Every station of the selected line:</div>
       <div class="pool" id="pool"></div>
-
-      <div class="metrics">
-        <div class="metric">
-          <div>
-            <div class="metric-title">Score</div>
-            <div class="metric-value" id="scoreValue">0 / 0</div>
-          </div>
-          <span class="pill-green" id="scorePct">0%</span>
-        </div>
-        <div class="metric">
-          <div>
-            <div class="metric-title">Chips placed</div>
-            <div class="metric-value" id="placedValue">0</div>
-          </div>
-          <span class="line-badge">of <span id="totalValue">0</span></span>
-        </div>
-      </div>
 
       <div class="status" id="status"></div>
     </div>
