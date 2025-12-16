@@ -12,7 +12,7 @@
            url("./fonts/MyFont.ttf") format("truetype");
       font-display: swap;
     }
-    
+
     :root {
       --bg: #f8fafb;
       --card: #ffffff;
@@ -25,13 +25,57 @@
       --badge: #eef2f7;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; padding: 28px; font-family: "MyFont", "Inter", system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
+    body { margin: 0; padding: 28px; font-family: "MyFont"; background: var(--bg); color: var(--text); }
     header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
     header h1 { margin: 0; font-size: 24px; font-weight: 700; }
     header .pill { background: var(--badge); color: var(--muted); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+
+    /* Center-aligned login (neutral styling) */
+    .login-hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 160px); /* fill most of viewport minus header padding */
+      margin: 0 0 32px;
+    }
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 90%;
+      max-width: 520px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .login-card h2 { margin: 0 0 8px; }
+    .login-card p { margin: 0 0 16px; color: var(--muted); }
+    .login-group { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: center; }
+    .login-group input {
+      min-width: 240px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+    .login-btn {
+      background: var(--text);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .login-btn:hover { opacity: 0.9; }
+    .login-btn:active { transform: translateY(1px); }
+    #loginError { color: #d92d20; font-weight: 600; margin-top: 8px; }
+
     .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; }
     .controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
-    select, button { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; font-weight: 600; background: #fff; color: var(--text); touch-action: manipulation; }
+    select, button, input { border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; font-weight: 600; background: #fff; color: var(--text); touch-action: manipulation; }
     select { min-width: 220px; background-image: linear-gradient(45deg, transparent 50%, #6b778c 50%), linear-gradient(135deg, #6b778c 50%, transparent 50%); background-position: right 12px center, right 6px center; background-size: 8px 8px, 8px 8px; background-repeat: no-repeat; -webkit-appearance: none; appearance: none; padding-right: 30px; }
     button { background: var(--text); color: #fff; border: none; box-shadow: var(--shadow); cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
     button:hover { opacity: 0.9; }
@@ -52,17 +96,8 @@
     .chip.flying { position: fixed; pointer-events: none; z-index: 2000; transform: translate(-50%, -50%); box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18); opacity: 0.96; }
     .pool-label { color: #000000; font-weight: 700; margin: 0 0 8px; font-size: 13px; }
     .pool { display: flex; flex-wrap: wrap; gap: 10px; }
-    .status { display: grid; gap: 8px; margin-top: 12px; }
-    .status-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
-    .dot.correct { background: var(--accent); }
-    .dot.wrong { background: #f97316; }
-    .metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
-    .metric { flex: 1 1 180px; display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: #fbfcfe; }
-    .metric-title { color: var(--muted); font-size: 13px; }
-    .metric-value { font-weight: 800; }
-    .pill-green { color: var(--accent); font-weight: 800; font-size: 13px; }
     .empty { color: var(--muted); font-weight: 600; font-size: 14px; padding: 12px 0; }
+
     /* Modal */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
     .modal-backdrop.active { display: flex; }
@@ -71,7 +106,13 @@
     .modal p { margin: 6px 0; color: var(--muted); }
     .modal .metric-row { display: flex; justify-content: space-between; margin: 6px 0; font-weight: 700; }
     .close-btn { margin-top: 12px; width: 100%; background: var(--text); color: #fff; border: none; border-radius: 12px; padding: 10px; font-weight: 700; cursor: pointer; }
-    @media (max-width: 768px) { .controls { flex-direction: column; align-items: flex-start; } select { width: 100%; max-width: 480px; } }
+
+    @media (max-width: 768px) {
+      .controls { flex-direction: column; align-items: flex-start; }
+      select { width: 100%; max-width: 480px; }
+      .login-group { flex-direction: column; align-items: center; }
+      .login-group input { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -80,10 +121,24 @@
     <div class="pill">EBC Christmas Game</div>
   </header>
 
-  <div class="card">
+  <!-- Centered Login -->
+  <div class="login-hero" id="loginHero">
+    <div class="login-card" id="loginCard">
+      <h2>Login to Play</h2>
+      <p>Enter your name to start</p>
+      <div class="login-group">
+        <input type="text" id="playerName" placeholder="Enter your name..." />
+        <button id="loginBtn" class="login-btn">Login</button>
+      </div>
+      <p id="loginError"></p>
+    </div>
+  </div>
+
+  <!-- Game card -->
+  <div class="card" id="gameCard" style="display:none;">
     <div class="controls">
       <label for="lineSelect" style="font-weight:700;">MRT Line:</label>
-      <select id="lineSelect" aria-label="Select MRT line">
+      <select id="lineSelect" aria-label="Select MRT line" disabled>
         <option value="" selected disabled>Choose a line…</option>
         <option value="ns">North South Line (NS)</option>
         <option value="ew">East West Line (EW)</option>
@@ -91,7 +146,6 @@
         <option value="dt">Downtown Line (DT)</option>
         <option value="te">Thomson–East Coast Line (TE)</option>
       </select>
-      <button id="resetBtn">Reset line</button>
       <button id="submitBtn">Submit</button>
     </div>
 
@@ -114,25 +168,6 @@
 
       <div class="pool-label">Every station of the selected line:</div>
       <div class="pool" id="pool"></div>
-
-      <div class="metrics">
-        <div class="metric">
-          <div>
-            <div class="metric-title">Score</div>
-            <div class="metric-value" id="scoreValue">0 / 0</div>
-          </div>
-          <span class="pill-green" id="scorePct">0%</span>
-        </div>
-        <div class="metric">
-          <div>
-            <div class="metric-title">Chips placed</div>
-            <div class="metric-value" id="placedValue">0</div>
-          </div>
-          <span class="line-badge">of <span id="totalValue">0</span></span>
-        </div>
-      </div>
-
-      <div class="status" id="status"></div>
     </div>
   </div>
 
@@ -148,64 +183,46 @@
   </div>
 
   <script>
-    // Stations from V2 CSV (codes removed), order preserved exactly
+    const API_URL = "https://script.google.com/macros/s/REPLACE_WITH_YOUR_WEBAPP/exec";
+
     const lines = {
-      ns: {
-        code: "NS",
-        name: "North South Line",
-        color: "#D8242A",
-        stations: [
-          "Jurong East","Bukit Batok","Bukit Gombak","Choa Chu Kang","Yew Tee","Kranji","Marsiling","Woodlands",
-          "Admiralty","Sembawang","Canberra","Yishun","Khatib","Yio Chu Kang","Ang Mo Kio","Bishan","Braddell",
-          "Toa Payoh","Novena","Newton","Orchard","Somerset","Dhoby Ghaut","City Hall","Raffles Place","Marina Bay",
-          "Marina South Pier"
-        ]
-      },
-      ew: {
-        code: "EW",
-        name: "East West Line",
-        color: "#009739",
-        stations: [
-          "Pasir Ris","Tampines","Simei","Tanah Merah","Bedok","Kembangan","Eunos","Paya Lebar","Aljunied","Kallang",
-          "Lavender","Bugis","City Hall","Raffles Place","Tanjong Pagar","Outram Park","Tiong Bahru","Redhill",
-          "Queenstown","Commonwealth","Buona Vista","Dover","Clementi","Jurong East","Chinese Garden","Lakeside","Boon Lay",
-          "Pioneer","Joo Koon","Gul Circle","Tuas Crescent","Tuas West Road","Tuas Link"
-        ]
-      },
-      ne: {
-        code: "NE",
-        name: "North East Line",
-        color: "#9B27B0",
-        stations: [
-          "HarbourFront","Outram Park","Chinatown","Clarke Quay","Dhoby Ghaut","Little India","Farrer Park","Boon Keng",
-          "Potong Pasir","Woodleigh","Serangoon","Kovan","Hougang","Buangkok","Sengkang","Punggol","Punggol Coast"
-        ]
-      },
-      dt: {
-        code: "DT",
-        name: "Downtown Line",
-        color: "#005EB8",
-        stations: [
-          "Bukit Panjang","Cashew","Hillview","Hume","Beauty World","King Albert Park","Sixth Avenue","Tan Kah Kee",
-          "Botanic Gardens","Stevens","Newton","Little India","Rochor","Bugis","Promenade","Bayfront","Downtown",
-          "Telok Ayer","Chinatown","Fort Canning","Bencoolen","Jalan Besar","Bendemeer","Geylang Bahru","Mattar",
-          "MacPherson","Ubi","Kaki Bukit","Bedok North","Bedok Reservoir","Tampines West","Tampines","Tampines East",
-          "Upper Changi","Expo"
-        ]
-      },
-      te: {
-        code: "TE",
-        name: "Thomson–East Coast Line",
-        color: "#8B5E3C",
-        stations: [
-          "Woodlands North","Woodlands","Woodlands South","Springleaf","Lentor","Mayflower","Bright Hill","Upper Thomson",
-          "Caldecott","Stevens","Napier","Orchard Boulevard","Orchard","Great World","Havelock","Outram Park","Maxwell",
-          "Shenton Way","Marina Bay","Gardens by the Bay","Tanjong Rhu","Katong Park","Tanjong Katong",
-          "Marine Parade","Marine Terrace","Siglap","Bayshore"
-        ]
-      }
+      ns: { code: "NS", name: "North South Line", color: "#D8242A", stations: [
+        "Jurong East","Bukit Batok","Bukit Gombak","Choa Chu Kang","Yew Tee","Kranji","Marsiling","Woodlands",
+        "Admiralty","Sembawang","Canberra","Yishun","Khatib","Yio Chu Kang","Ang Mo Kio","Bishan","Braddell",
+        "Toa Payoh","Novena","Newton","Orchard","Somerset","Dhoby Ghaut","City Hall","Raffles Place","Marina Bay",
+        "Marina South Pier"
+      ]},
+      ew: { code: "EW", name: "East West Line", color: "#009739", stations: [
+        "Pasir Ris","Tampines","Simei","Tanah Merah","Bedok","Kembangan","Eunos","Paya Lebar","Aljunied","Kallang",
+        "Lavender","Bugis","City Hall","Raffles Place","Tanjong Pagar","Outram Park","Tiong Bahru","Redhill",
+        "Queenstown","Commonwealth","Buona Vista","Dover","Clementi","Jurong East","Chinese Garden","Lakeside","Boon Lay",
+        "Pioneer","Joo Koon","Gul Circle","Tuas Crescent","Tuas West Road","Tuas Link"
+      ]},
+      ne: { code: "NE", name: "North East Line", color: "#9B27B0", stations: [
+        "HarbourFront","Outram Park","Chinatown","Clarke Quay","Dhoby Ghaut","Little India","Farrer Park","Boon Keng",
+        "Potong Pasir","Woodleigh","Serangoon","Kovan","Hougang","Buangkok","Sengkang","Punggol","Punggol Coast"
+      ]},
+      dt: { code: "DT", name: "Downtown Line", color: "#005EB8", stations: [
+        "Bukit Panjang","Cashew","Hillview","Hume","Beauty World","King Albert Park","Sixth Avenue","Tan Kah Kee",
+        "Botanic Gardens","Stevens","Newton","Little India","Rochor","Bugis","Promenade","Bayfront","Downtown",
+        "Telok Ayer","Chinatown","Fort Canning","Bencoolen","Jalan Besar","Bendemeer","Geylang Bahru","Mattar",
+        "MacPherson","Ubi","Kaki Bukit","Bedok North","Bedok Reservoir","Tampines West","Tampines","Tampines East",
+        "Upper Changi","Expo"
+      ]},
+      te: { code: "TE", name: "Thomson–East Coast Line", color: "#8B5E3C", stations: [
+        "Woodlands North","Woodlands","Woodlands South","Springleaf","Lentor","Mayflower","Bright Hill","Upper Thomson",
+        "Caldecott","Stevens","Napier","Orchard Boulevard","Orchard","Great World","Havelock","Outram Park","Maxwell",
+        "Shenton Way","Marina Bay","Gardens by the Bay","Tanjong Rhu","Katong Park","Tanjong Katong",
+        "Marine Parade","Marine Terrace","Siglap","Bayshore"
+      ]}
     };
 
+    const loginHero = document.getElementById("loginHero");
+    const loginBtn = document.getElementById("loginBtn");
+    const loginError = document.getElementById("loginError");
+    const playerNameInput = document.getElementById("playerName");
+
+    const gameCard = document.getElementById("gameCard");
     const lineSelect = document.getElementById("lineSelect");
     const board = document.getElementById("board");
     const emptyState = document.getElementById("emptyState");
@@ -213,13 +230,8 @@
     const lineBadge = document.getElementById("lineBadge");
     const slotsEl = document.getElementById("slots");
     const poolEl = document.getElementById("pool");
-    const statusEl = document.getElementById("status");
-    const scoreValue = document.getElementById("scoreValue");
-    const scorePct = document.getElementById("scorePct");
-    const placedValue = document.getElementById("placedValue");
-    const totalValue = document.getElementById("totalValue");
     const submitBtn = document.getElementById("submitBtn");
-    const resetBtn = document.getElementById("resetBtn");
+
     const modalBackdrop = document.getElementById("modalBackdrop");
     const modalScore = document.getElementById("modalScore");
     const modalPlaced = document.getElementById("modalPlaced");
@@ -229,6 +241,7 @@
     let chips = [];
     let locked = false;
     let flyChip = null;
+    let currentUser = "";
 
     function shuffle(arr) {
       const a = [...arr];
@@ -246,12 +259,6 @@
       emptyState.style.display = "block";
       slotsEl.innerHTML = "";
       poolEl.innerHTML = "";
-      statusEl.innerHTML = "";
-      scoreValue.textContent = "0 / 0";
-      scorePct.textContent = "0%";
-      placedValue.textContent = "0";
-      totalValue.textContent = "0";
-      hideModal();
     }
 
     function buildBoard(lineKey) {
@@ -270,7 +277,6 @@
 
       slotsEl.innerHTML = "";
       poolEl.innerHTML = "";
-      statusEl.innerHTML = "";
       chips = [];
 
       line.stations.forEach((_, idx) => {
@@ -291,12 +297,6 @@
         poolEl.appendChild(chip);
         chips.push(chip);
       });
-
-      totalValue.textContent = chips.length;
-      updateProgress();
-      scoreValue.textContent = `0 / ${chips.length}`;
-      scorePct.textContent = "0%";
-      hideModal();
     }
 
     function addDragHandlers(el) {
@@ -367,8 +367,7 @@
         const existingChip = slot.querySelector(".chip");
         if (existingChip) poolEl.appendChild(existingChip);
         slot.appendChild(chip);
-        updateProgress();
-        return;
+        return updateProgress();
       }
       poolEl.appendChild(chip);
       updateProgress();
@@ -407,40 +406,50 @@
       updateProgress();
     });
 
-    function grade() {
+    function updateProgress() {
+      // progress hidden in UI; kept for extensibility
+    }
+
+    async function grade() {
       const lineKey = lineSelect.value;
       const line = lines[lineKey];
       if (!line) return;
 
       const total = chips.length;
       let correct = 0;
-      const placed = chips.filter(chip => chip.parentElement.classList.contains("slot")).length;
 
-      document.querySelectorAll(".slot").forEach(slot => {
-        const idx = Number(slot.dataset.slotIndex);
+      const placements = Array.from(document.querySelectorAll(".slot")).map(slot => {
         const chip = slot.querySelector(".chip");
-        if (chip && chip.textContent === line.stations[idx]) correct += 1;
+        return chip ? chip.textContent : "";
       });
 
-      statusEl.innerHTML = "";
-      const row = document.createElement("div");
-      row.className = "status-item";
-      row.innerHTML = `
-        <span class="dot ${placed === total && correct === total ? "correct" : placed > 0 ? "wrong" : ""}"></span>
-        <strong>${line.name}</strong> — placed ${placed} / ${total}, correct position ${correct} / ${total}
-      `;
-      statusEl.appendChild(row);
+      placements.forEach((name, idx) => {
+        if (name && name === line.stations[idx]) correct += 1;
+      });
 
-      scoreValue.textContent = `${correct} / ${total}`;
-      const pct = Math.round((correct / total) * 100);
-      scorePct.textContent = `${pct}%`;
+      const placed = placements.filter(Boolean).length;
+
+      showModal(correct, placed, total, line.name);
 
       lockBoard();
-      showModal(correct, placed, total, line.name);
+
+      const scoreValue = `${correct} / ${total}`;
+      
+      try {
+        const formData = new FormData();
+        formData.append("action", "submit");
+        formData.append("user", currentUser);
+        formData.append("score", scoreValue);
+        await fetch(API_URL, { method: "POST", body: formData });
+      } catch (err) {
+        console.warn("Submit upload failed:", err);
+}
     }
 
     function lockBoard() {
       locked = true;
+      lineSelect.disabled = true;
+      submitBtn.disabled = true;
       document.querySelectorAll(".chip").forEach(chip => {
         chip.classList.add("locked");
         chip.draggable = false;
@@ -450,16 +459,13 @@
 
     function unlockBoard() {
       locked = false;
+      lineSelect.disabled = false;
+      submitBtn.disabled = false;
       document.querySelectorAll(".chip").forEach(chip => {
         chip.classList.remove("locked");
         chip.draggable = true;
       });
       document.querySelectorAll(".slot").forEach(slot => slot.classList.remove("locked"));
-    }
-
-    function updateProgress() {
-      const placed = chips.filter(chip => chip.parentElement.classList.contains("slot")).length;
-      placedValue.textContent = placed;
     }
 
     function showModal(correct, placed, total, lineName) {
@@ -472,17 +478,25 @@
       modalBackdrop.classList.remove("active");
     }
 
-    // Events
+    loginBtn.addEventListener("click", () => {
+      const name = playerNameInput.value.trim();
+      if (!name) {
+        loginError.textContent = "Name cannot be empty.";
+        return;
+      }
+      currentUser = name;
+      loginError.textContent = "";
+      loginHero.style.display = "none";
+      gameCard.style.display = "block";
+      lineSelect.disabled = false;
+      lineSelect.focus();
+    });
+
     const handleLineSelect = () => { buildBoard(lineSelect.value); unlockBoard(); };
     lineSelect.addEventListener("change", handleLineSelect);
     lineSelect.addEventListener("input", handleLineSelect);
 
     submitBtn.addEventListener("click", grade);
-    resetBtn.addEventListener("click", () => {
-      const val = lineSelect.value;
-      if (val) { buildBoard(val); unlockBoard(); }
-      else clearBoard();
-    });
     closeModal.addEventListener("click", hideModal);
     modalBackdrop.addEventListener("click", e => { if (e.target === modalBackdrop) hideModal(); });
 
