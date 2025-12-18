@@ -90,7 +90,7 @@
     .slot { position: relative; z-index: 1; border: 1px solid #e0e7ff; border-radius: 12px; background: #fff; min-width: 110px; min-height: 52px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.7); transition: border-color 0.2s, background 0.2s; flex-shrink: 0; }
     .slot.drag-over { border-color: var(--accent); background: #eefbf3; }
     .slot.locked { opacity: 0.9; }
-    .chip { background: #eef2ff; color: #4338ca; padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; border: 1px solid #e0e7ff; cursor: grab; user-select: none; box-shadow: 0 6px 16px rgba(67, 56, 202, 0.1); transition: transform 0.12s ease; white-space: nowrap; touch-action: none; }
+    .chip { padding: 10px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; border: 1px solid #e0e7ff; cursor: grab; user-select: none; box-shadow: 0 6px 16px rgba(67, 56, 202, 0.1); transition: transform 0.12s ease; white-space: nowrap; touch-action: none; border: 1px solid transparent; background: #eef2ff; color: #4338ca; }
     .chip:active { cursor: grabbing; transform: scale(0.98); }
     .chip.locked { cursor: not-allowed; opacity: 0.7; }
     .chip.flying { position: fixed; pointer-events: none; z-index: 2000; transform: translate(-50%, -50%); box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18); opacity: 0.96; }
@@ -217,6 +217,8 @@
       ]}
     };
 
+    const hintCounts = { ns: 8, ew: 10, ne: 5, dt: 11, te: 8 };
+
     const loginHero = document.getElementById("loginHero");
     const loginBtn = document.getElementById("loginBtn");
     const loginError = document.getElementById("loginError");
@@ -252,6 +254,39 @@
       return a;
     }
 
+    function pickHintIndices(len, count) {
+      const result = [];
+      if (count <= 0) return result;
+      const maxCount = Math.min(count, len);
+      let attempts = 0;
+      while (result.length < maxCount && attempts < 200) {
+        const idx = Math.floor(Math.random() * len);
+        const tooClose = result.some(i => Math.abs(i - idx) <= 1);
+        if (!tooClose && !result.includes(idx)) {
+          result.push(idx);
+        }
+        attempts++;
+      }
+      return result.sort((a, b) => a - b);
+    }
+
+    function tint(hex, alphaBg = 0.16) {
+      // simple overlay on white for background tint
+      const c = hex.replace('#','');
+      const r = parseInt(c.substring(0,2),16);
+      const g = parseInt(c.substring(2,4),16);
+      const b = parseInt(c.substring(4,6),16);
+      const bg = alphaBg;
+      return `rgba(${r}, ${g}, ${b}, ${bg})`;
+    }
+
+    function applyChipColor(chip, hex) {
+      chip.style.background = tint(hex, 0.15);
+      chip.style.borderColor = hex;
+      chip.style.color = hex;
+      chip.style.boxShadow = `0 6px 16px ${tint(hex, 0.20)}`;
+    }
+
     function clearBoard() {
       locked = false;
       removeFlyChip();
@@ -279,21 +314,38 @@
       poolEl.innerHTML = "";
       chips = [];
 
-      line.stations.forEach((_, idx) => {
+      const hintCount = hintCounts[lineKey] || 0;
+      const hintIndices = pickHintIndices(line.stations.length, hintCount);
+      const hintedSet = new Set(hintIndices);
+
+      line.stations.forEach((station, idx) => {
         const slot = document.createElement("div");
         slot.className = "slot";
         slot.dataset.slotIndex = idx;
         addDropHandlers(slot);
+        if (hintedSet.has(idx)) {
+          const chip = document.createElement("div");
+          chip.className = "chip";
+          chip.draggable = true;
+          chip.textContent = station;
+          addDragHandlers(chip);
+          addTouchHandlers(chip);
+          applyChipColor(chip, line.color);
+          slot.appendChild(chip);
+          chips.push(chip);
+        }
         slotsEl.appendChild(slot);
       });
 
-      shuffle(line.stations).forEach(st => {
+      const remaining = line.stations.filter((_, idx) => !hintedSet.has(idx));
+      shuffle(remaining).forEach(st => {
         const chip = document.createElement("div");
         chip.className = "chip";
         chip.draggable = true;
         chip.textContent = st;
         addDragHandlers(chip);
         addTouchHandlers(chip);
+        applyChipColor(chip, line.color);
         poolEl.appendChild(chip);
         chips.push(chip);
       });
