@@ -257,12 +257,28 @@
     function pickHintIndices(len, count) {
       const result = [];
       if (count <= 0) return result;
-      const maxCount = Math.min(count, len);
-      let attempts = 0;
-      while (result.length < maxCount && attempts < 200) {
-        const idx = Math.floor(Math.random() * len);
+      const idxs = Array.from({ length: len }, (_, i) => i);
+      shuffle(idxs);
+
+      const rejected = [];
+      for (const idx of idxs) {
+        if (result.length >= count) break;
         const tooClose = result.some(i => Math.abs(i - idx) <= 1);
-        if (!tooClose && !result.includes(idx)) {
+        if (tooClose) { rejected.push(idx); continue; }
+        result.push(idx);
+      }
+      if (result.length < count) {
+        shuffle(rejected);
+        for (const idx of rejected) {
+          if (result.length >= count) break;
+          if (!result.includes(idx)) result.push(idx);
+        }
+      }
+      if (result.length < count) {
+        // If still short (shouldn't happen often), fill with any remaining
+        const rest = idxs.filter(i => !result.includes(i));
+        for (const idx of rest) {
+          if (result.length >= count) break;
           result.push(idx);
         }
         attempts++;
