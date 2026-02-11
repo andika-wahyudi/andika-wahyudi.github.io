@@ -3,81 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abstract Geometric Portfolio</title>
+  <title>Portfolio — Geometric Theme</title>
   <link rel="stylesheet" href="styles-secexco.css" />
 </head>
 <body>
-  <div class="frame">
-    <main class="layout">
-      <header class="nav">
-        <div class="brand">brandname</div>
-        <nav class="links">
-          <a href="#">About</a>
-          <a href="#">Works</a>
-          <a href="#">Contact</a>
-        </nav>
-      </header>
+  <div class="page">
+    <header class="topbar">
+      <div class="logo">
+        <span class="logo-mark"></span>
+        <span class="logo-text">Your Name</span>
+      </div>
+      <div class="top-shapes">
+        <span class="shape shape-half"></span>
+        <span class="shape shape-quad"></span>
+        <span class="shape shape-tri"></span>
+      </div>
+    </header>
 
-      <section class="hero">
-        <div class="hero-text">
-          <h1>abstract<br/>geometric<br/>design.</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.</p>
-          <button class="cta">Learn more</button>
+    <section class="hero">
+      <h1>Portfolio</h1>
+      <p class="subtitle">A scrollable collection of my selected works.</p>
+    </section>
+
+    <section class="works-zigzag">
+      <!-- Project 1: image left, text right -->
+      <article class="work-row">
+        <a href="assets/portfolio-01.pdf" download class="work-link">
+          <div class="work-preview">
+            <div class="a4"></div>
+            <div class="work-hover">Click to download</div>
+          </div>
+        </a>
+        <div class="work-text">
+          <h3>Project One</h3>
+          <p>Brand identity & layout design. A clean visual system with structured typography and bold geometric forms.</p>
         </div>
+      </article>
 
-        <div class="hero-art">
-          <div class="grid">
-            <span class="circle pink"></span>
-            <span class="circle purple"></span>
-            <span class="square blue"></span>
-            <span class="quarter teal"></span>
-            <span class="half magenta"></span>
-            <span class="square yellow"></span>
-            <span class="circle green"></span>
-            <span class="quarter lavender"></span>
+      <!-- Project 2: image right, text left -->
+      <article class="work-row reverse">
+        <a href="assets/portfolio-02.pdf" download class="work-link">
+          <div class="work-preview">
+            <div class="a4"></div>
+            <div class="work-hover">Click to download</div>
           </div>
+        </a>
+        <div class="work-text">
+          <h3>Project Two</h3>
+          <p>Editorial & typography exploration. A soft grid system with rhythmic spacing and calm typography.</p>
         </div>
-      </section>
+      </article>
 
-      <section class="works">
-        <article class="work-card">
-          <a href="assets/portfolio-01.pdf" download class="work-link">
-            <div class="work-preview"><div class="a4"></div></div>
+      <!-- Project 3: image left, text right -->
+      <article class="work-row">
+        <a href="assets/portfolio-03.pdf" download class="work-link">
+          <div class="work-preview">
+            <div class="a4"></div>
             <div class="work-hover">Click to download</div>
-          </a>
-          <div class="work-meta">
-            <h3>Project One</h3>
-            <p>Brand identity & layout design</p>
           </div>
-        </article>
+        </a>
+        <div class="work-text">
+          <h3>Project Three</h3>
+          <p>Interface system & components. A modular UI kit built for clarity, balance, and accessibility.</p>
+        </div>
+      </article>
+    </section>
 
-        <article class="work-card">
-          <a href="assets/portfolio-02.pdf" download class="work-link">
-            <div class="work-preview"><div class="a4"></div></div>
-            <div class="work-hover">Click to download</div>
-          </a>
-          <div class="work-meta">
-            <h3>Project 2</h3>
-            <p>Editorial & typography exploration</p>
-          </div>
-        </article>
-
-        <article class="work-card">
-          <a href="assets/portfolio-03.pdf" download class="work-link">
-            <div class="work-preview"><div class="a4"></div></div>
-            <div class="work-hover">Click to download</div>
-          </a>
-          <div class="work-meta">
-            <h3>Project Three</h3>
-            <p>Interface system & components</p>
-          </div>
-        </article>
-      </section>
-
-      <footer class="footer">
-        <p>© 2026 Your Name — All rights reserved.</p>
-      </footer>
-    </main>
+    <footer class="footer">
+      <div class="bottom-shapes">
+        <span class="shape shape-arc"></span>
+        <span class="shape shape-circle"></span>
+        <span class="shape shape-tri"></span>
+      </div>
+      <p>© 2026 Your Name — All rights reserved.</p>
+    </footer>
   </div>
 </body>
 </html>
