@@ -6,101 +6,122 @@
   <title>Portfolio — Geometric Theme</title>
   <style>
     :root{
-      --bg:#faf6ef;
-      --ink:#2e2e2e;
-      --soft:#6b6b6b;
-      --accent-1:#2b7a6f;
-      --accent-2:#f26b1d;
-      --accent-3:#f3c200;
-      --accent-4:#6a3fa0;
-      --accent-5:#0b74e4;
-      --card-border:#3b3b3b;
+      --bg:#151516;
+      --ink:#f2f2f2;
+      --soft:#c7c7c7;
+      --grid:#2a2a2a;
+
+      --card-border:#f2f2f2;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family: "Inter", system-ui, -apple-system, sans-serif;
-      background:var(--bg);
       color:var(--ink);
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size:40px 40px;
+      background-color:var(--bg);
     }
 
     .page{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
+      max-width: 100%;
+      margin: 0;
+      padding: 48px 4vw 80px;
     }
 
     .topbar{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      margin-bottom:56px;
+      margin-bottom:30px;
     }
 
     .logo{
-      display:flex;
-      align-items:center;
-      gap:10px;
       font-weight:700;
+      padding-left:28px;
     }
 
-    .logo-mark{
-      width:20px;height:20px;border-radius:4px;
-      background:linear-gradient(135deg,var(--accent-2),var(--accent-4));
-      display:inline-block;
+    .contact-links{
+      font-size:14px;
+      color:var(--soft);
     }
 
-    .top-shapes{
-      display:flex;gap:10px;align-items:center;
+    .contact-links a{
+      margin-left:10px;
+      text-decoration:none;
+      color:var(--soft);
+      font-weight:600;
     }
 
-    .shape{
-      display:inline-block;
+    .contact-links a:hover{
+      color:var(--ink);
     }
-    .shape-half{
-      width:40px;height:40px;
-      background:var(--accent-1);
-      border-radius:0 0 40px 40px;
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap:28px;
+      align-items:center;
+      margin-bottom:50px;
     }
-    .shape-quad{
-      width:36px;height:36px;background:var(--accent-3);
-    }
-    .shape-tri{
-      width:0;height:0;border-left:20px solid transparent;
-      border-right:20px solid transparent;
-      border-bottom:35px solid var(--accent-2);
+
+    .hero-text{
+      padding-left:28px;
     }
 
     .hero h1{
       font-size:44px;
       margin-bottom:10px;
     }
+
     .subtitle{
       color:var(--soft);
-      margin-bottom:52px;
+      margin-bottom:16px;
     }
 
-    /* Zig-zag layout */
+    .hero-art{
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .hero-image{
+      width:460px;
+      height:420px;
+      object-fit:contain;
+      background:transparent;
+    }
+
+    .works-wrap{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4vw;
+    }
+
     .works-zigzag{
       display:flex;
       flex-direction:column;
-      gap:54px;
+      gap:70px;
     }
 
     .work-row{
       display:grid;
       grid-template-columns: minmax(260px, 360px) 1fr;
-      gap:42px;
-      align-items:start;
+      gap:60px;
+      align-items:center;
     }
 
     .work-row.reverse{
-      direction: rtl;
       grid-template-columns: 1fr minmax(260px, 360px);
     }
-    .work-row.reverse .work-text,
+
     .work-row.reverse .work-link{
-      direction: ltr;
+      order:2;
+      justify-self:end;
+    }
+    .work-row.reverse .work-text{
+      order:1;
     }
 
     .work-link{
@@ -109,23 +130,24 @@
       color:inherit;
       width:100%;
       max-width:360px;
+      justify-self:center;
     }
 
     .work-preview{
       position:relative;
-      border:2px solid var(--card-border);
+      border:2px dotted var(--card-border);
       border-radius:22px;
       padding:18px;
-      background:#fff8;
+      background:rgba(255,255,255,0.04);
       width:100%;
     }
 
     .a4{
       aspect-ratio: 210 / 297;
       width:100%;
-      border:1.5px solid #bbb;
+      border:1.5px solid rgba(255,255,255,0.35);
       border-radius:12px;
-      background:linear-gradient(135deg,#fdfdfd 0%,#f0f0f0 100%);
+      background:linear-gradient(135deg,#2a2a2a 0%,#1c1c1c 100%);
     }
 
     .work-hover{
@@ -151,14 +173,23 @@
       opacity:1;
     }
 
+    .work-text{
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+    }
+
     .work-text h3{
-      font-size:22px;
-      margin-bottom:10px;
+      font-size:32px;
+      margin-bottom:4px;
     }
     .work-text p{
       color:var(--soft);
-      font-size:15px;
+      font-size:18px;
       line-height:1.6;
+      max-width:460px;
     }
 
     .footer{
@@ -167,28 +198,35 @@
       color:var(--soft);
     }
 
-    .bottom-shapes{
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      margin-bottom:16px;
-    }
-
-    .shape-arc{
-      width:50px;height:25px;border-radius:50px 50px 0 0;
-      background:var(--accent-3);
-    }
-    .shape-circle{
-      width:28px;height:28px;border-radius:50%;
-      background:var(--accent-4);
-    }
-
     @media (max-width: 820px){
+      .hero{
+        grid-template-columns:1fr;
+      }
+      .hero-text{
+        padding-left:0;
+      }
+      .logo{
+        padding-left:0;
+      }
+      .hero-art{
+        justify-content:center;
+      }
+      .hero-image{
+        width:320px;
+        height:300px;
+      }
+      .works-wrap{
+        padding: 0 2vw;
+      }
       .work-row{
         grid-template-columns:1fr;
       }
-      .work-row.reverse{
-        direction:ltr;
+      .work-row.reverse .work-link{
+        order:1;
+        justify-self:center;
+      }
+      .work-row.reverse .work-text{
+        order:2;
       }
       .work-link{
         max-width:100%;
@@ -200,68 +238,76 @@
   <div class="page">
     <header class="topbar">
       <div class="logo">
-        <span class="logo-mark"></span>
         <span class="logo-text">Your Name</span>
       </div>
-      <div class="top-shapes">
-        <span class="shape shape-half"></span>
-        <span class="shape shape-quad"></span>
-        <span class="shape shape-tri"></span>
+      <div class="contact-links">
+        Contact Me:
+        <a href="https://instagram.com/example" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/1234567890" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </header>
 
     <section class="hero">
-      <h1>Portfolio</h1>
-      <p class="subtitle">A scrollable collection of my selected works.</p>
+      <div class="hero-text">
+        <h1>Portfolio</h1>
+        <p class="subtitle">A scrollable collection of my selected works.</p>
+      </div>
+
+      <div class="hero-art">
+        <img src="assets/hero-geo.png" alt="Geometric hero art" class="hero-image"/>
+      </div>
     </section>
 
-    <section class="works-zigzag">
-      <article class="work-row">
-        <a href="assets/portfolio-01.pdf" download class="work-link">
-          <div class="work-preview">
-            <div class="a4"></div>
-            <div class="work-hover">Click to download</div>
+    <section class="works-wrap">
+      <div class="works-zigzag">
+        <article class="work-row">
+          <a href="assets/portfolio-01.pdf" target="_blank" rel="noopener" class="work-link">
+            <div class="work-preview">
+              <div class="a4"></div>
+              <div class="work-hover">Click to download</div>
+            </div>
+          </a>
+          <div class="work-text">
+            <div>
+              <h3>Project One</h3>
+              <p>Brand identity & layout design. A clean visual system with structured typography and bold geometric forms.</p>
+            </div>
           </div>
-        </a>
-        <div class="work-text">
-          <h3>Project One</h3>
-          <p>Brand identity & layout design. A clean visual system with structured typography and bold geometric forms.</p>
-        </div>
-      </article>
+        </article>
 
-      <article class="work-row reverse">
-        <a href="assets/portfolio-02.pdf" download class="work-link">
-          <div class="work-preview">
-            <div class="a4"></div>
-            <div class="work-hover">Click to download</div>
+        <article class="work-row reverse">
+          <a href="assets/portfolio-02.pdf" target="_blank" rel="noopener" class="work-link">
+            <div class="work-preview">
+              <div class="a4"></div>
+              <div class="work-hover">Click to download</div>
+            </div>
+          </a>
+          <div class="work-text">
+            <div>
+              <h3>Project Two</h3>
+              <p>Editorial & typography exploration. A soft grid system with rhythmic spacing and calm typography.</p>
+            </div>
           </div>
-        </a>
-        <div class="work-text">
-          <h3>Project Two</h3>
-          <p>Editorial & typography exploration. A soft grid system with rhythmic spacing and calm typography.</p>
-        </div>
-      </article>
+        </article>
 
-      <article class="work-row">
-        <a href="assets/portfolio-03.pdf" download class="work-link">
-          <div class="work-preview">
-            <div class="a4"></div>
-            <div class="work-hover">Click to download</div>
+        <article class="work-row">
+          <a href="assets/portfolio-03.pdf" target="_blank" rel="noopener" class="work-link">
+            <div class="work-preview">
+              <div class="a4"></div>
+              <div class="work-hover">Click to download</div>
+            </div>
+          </a>
+          <div class="work-text">
+            <div>
+              <h3>Project Three</h3>
+              <p>Interface system & components. A modular UI kit built for clarity, balance, and accessibility.</p>
+            </div>
           </div>
-        </a>
-        <div class="work-text">
-          <h3>Project Three</h3>
-          <p>Interface system & components. A modular UI kit built for clarity, balance, and accessibility.</p>
-        </div>
-      </article>
+        </article>
+      </div>
     </section>
 
     <footer class="footer">
-      <div class="bottom-shapes">
-        <span class="shape shape-arc"></span>
-        <span class="shape shape-circle"></span>
-        <span class="shape shape-tri"></span>
-      </div>
       <p>© 2026 Your Name — All rights reserved.</p>
     </footer>
   </div>
