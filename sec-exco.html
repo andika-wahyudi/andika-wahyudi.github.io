@@ -23,12 +23,14 @@
         linear-gradient(90deg, var(--grid) 1px, transparent 1px);
       background-size:40px 40px;
       background-color:var(--bg);
+      overflow-x:auto;
     }
 
     .page{
       max-width: 100%;
       margin: 0;
       padding: 48px 4vw 80px;
+      min-width: 980px;
     }
 
     .topbar{
@@ -148,6 +150,15 @@
       border:1.5px solid rgba(255,255,255,0.35);
       border-radius:12px;
       background:linear-gradient(135deg,#2a2a2a 0%,#1c1c1c 100%);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .a4 img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     .work-hover{
@@ -192,6 +203,14 @@
       max-width:460px;
     }
 
+    .work-text a{
+      color:var(--ink);
+      text-decoration:underline;
+    }
+    .work-text a:hover{
+      color:#ffffff;
+    }
+
     .footer{
       margin-top:70px;
       text-align:center;
@@ -199,37 +218,8 @@
     }
 
     @media (max-width: 820px){
-      .hero{
-        grid-template-columns:1fr;
-      }
-      .hero-text{
-        padding-left:0;
-      }
-      .logo{
-        padding-left:0;
-      }
-      .hero-art{
-        justify-content:center;
-      }
-      .hero-image{
-        width:320px;
-        height:300px;
-      }
-      .works-wrap{
-        padding: 0 2vw;
-      }
-      .work-row{
-        grid-template-columns:1fr;
-      }
-      .work-row.reverse .work-link{
-        order:1;
-        justify-self:center;
-      }
-      .work-row.reverse .work-text{
-        order:2;
-      }
-      .work-link{
-        max-width:100%;
+      .page{
+        min-width: 980px;
       }
     }
   </style>
@@ -253,53 +243,59 @@
       </div>
 
       <div class="hero-art">
-        <img src="images/sec-exco/hero-art.png" alt="I <3 SecExCo" class="hero-image"/>
+        <img src="images/sec-exco/hero-art.png" alt="I <3 Sec ExCo" class="hero-image"/>
       </div>
     </section>
 
     <section class="works-wrap">
       <div class="works-zigzag">
         <article class="work-row">
-          <a href="assets/portfolio-01.pdf" target="_blank" rel="noopener" class="work-link">
+          <a href="images/sec-exco/SecExCo - Publicity Coordinator Designer.pdf" target="_blank" rel="noopener" class="work-link">
             <div class="work-preview">
-              <div class="a4"></div>
-              <div class="work-hover">Click to open</div>
+              <div class="a4">
+                <img src="images/sec-exco/SecExCo - Publicity Coordinator Designer.png" alt="Attachment Cover 01">
+              </div>
+              <div class="work-hover">Click to Open</div>
             </div>
           </a>
           <div class="work-text">
             <div>
-              <h3>Project One</h3>
-              <p>Brand identity & layout design. A clean visual system with structured typography and bold geometric forms.</p>
+              <h3>Publicity Coordinator - Designer</h3>
+              <p>As someone who have pursue this field for years, I believe good design is never just about making things look nice and engaging, but also helping people understand messages easily and feel interested to participate! Download the Sec 1 Orientation poster <a href="images/sec-exco/Poster_Designer.png" download>here</a>.</p>
             </div>
           </div>
         </article>
 
         <article class="work-row reverse">
-          <a href="assets/portfolio-02.pdf" target="_blank" rel="noopener" class="work-link">
+          <a href="images/sec-exco/SecExCo - Event Coordinator.pdf" target="_blank" rel="noopener" class="work-link">
             <div class="work-preview">
-              <div class="a4"></div>
-              <div class="work-hover">Click to open</div>
+              <div class="a4">
+                <img src="images/sec-exco/SecExCo - Event Coordinator.png" alt="Attachment Cover 02">
+              </div>
+              <div class="work-hover">Click to Open</div>
             </div>
           </a>
           <div class="work-text">
             <div>
-              <h3>Project Two</h3>
-              <p>Editorial & typography exploration. A soft grid system with rhythmic spacing and calm typography.</p>
+              <h3>Event Coordinator </h3>
+              <p>As an Event Coordinator, I would focus on planning events that are meaningful, not just enjoyable. And I believe Sec ExCo events should help scholars connect with one another, share experiences, and feel a stronger sense of belonging.</p>
             </div>
           </div>
         </article>
 
         <article class="work-row">
-          <a href="assets/portfolio-03.pdf" target="_blank" rel="noopener" class="work-link">
+          <a href="images/sec-exco/SecExCo - Secretary.pdf" target="_blank" rel="noopener" class="work-link">
             <div class="work-preview">
-              <div class="a4"></div>
-              <div class="work-hover">Click to open</div>
+              <div class="a4">
+                <img src="images/sec-exco/SecExCo - Secretary.png" alt="Attachment Cover 03">
+              </div>
+              <div class="work-hover">Click to Open</div>
             </div>
           </a>
           <div class="work-text">
             <div>
-              <h3>Project Three</h3>
-              <p>Interface system & components. A modular UI kit built for clarity, balance, and accessibility.</p>
+              <h3>Secretary</h3>
+              <p>As a Secretary, I aim to ensure clear communication, proper documentation, and smooth coordination within the team, so that all of us can contribute more efficiently and prevents misunderstandings.</p>
             </div>
           </div>
         </article>
