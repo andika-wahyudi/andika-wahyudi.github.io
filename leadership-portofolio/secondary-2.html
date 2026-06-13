@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondary 1 - Andika's Leadership Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafb;
+            --card: #ffffff;
+            --border: #e8edf2;
+            --text: #1f2a3d;
+            --muted: #6b778c;
+            --accent: #8074cd;
+            --shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+            --radius: 18px;
+            --badge: #eef2f7;
+            --accent-section: #8074cd;
+            --image-height: 200px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* ============ HEADER & NAVIGATION ============ */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        header h1 .accent {
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* ============ DROPDOWN ============ */
+        .nav-item {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0;
+            font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .dropdown-btn:hover {
+            color: var(--accent);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            min-width: 220px;
+            margin-top: 8px;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-content a:hover {
+            background: var(--badge);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            padding-left: 20px;
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://via.placeholder.com/1920x400?text=Secondary+1') center/cover;
+            color: white;
+            padding: 100px 28px;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        /* ============ CONTENT SECTIONS ============ */
+        .content-section {
+            padding: 0 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-intro {
+            background: var(--card);
+            padding: 28px 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .section-intro h3 {
+            margin: 0 0 16px 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .section-intro h3 .accent {
+            color: var(--accent);
+        }
+
+        .section-intro ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .section-intro li {
+            margin-bottom: 8px;
+        }
+
+        /* ============ ACCENT SECTION ============ */
+        .accent-section {
+            background: var(--accent-section);
+            padding: 40px 28px;
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            border-radius: var(--radius);
+        }
+
+        .accent-section.reverse {
+            direction: rtl;
+        }
+
+        .accent-section.reverse > * {
+            direction: ltr;
+        }
+
+        .accent-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        .accent-images-wrapper {
+            position: relative;
+            width: 100%;
+            height: var(--image-height);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .accent-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .accent-text {
+            color: white;
+        }
+
+        .accent-text h3 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .accent-text p {
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .accent-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .accent-text strong {
+            font-weight: 600;
+        }
+
+        /* ============ COLLAPSIBLE SECTION ============ */
+        .collapsible-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text);
+            transition: background 0.2s;
+            user-select: none;
+        }
+
+        .collapsible-header:hover {
+            background: #f9f9f9;
+        }
+
+        .collapsible-toggle {
+            font-size: 16px;
+            transition: transform 0.3s;
+            color: var(--accent);
+        }
+
+        .collapsible-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.open {
+            max-height: 1000px;
+        }
+
+        .collapsible-inner {
+            padding: 24px;
+        }
+
+        .collapsible-content p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+            margin: 0 0 16px 0;
+        }
+
+        .collapsible-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            :root {
+                --image-height: 160px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 16px 20px;
+                margin-bottom: 24px;
+            }
+
+            nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+                min-height: 200px;
+                margin-bottom: 30px;
+            }
+
+            .content-section {
+                padding: 0 20px;
+            }
+
+            .accent-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 30px 20px;
+            }
+
+            .accent-section.reverse {
+                direction: ltr;
+            }
+
+            .section-intro {
+                padding: 20px;
+            }
+
+            .collapsible-header {
+                padding: 16px;
+            }
+
+            .collapsible-inner {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --image-height: 120px;
+            }
+
+            header {
+                padding: 12px 16px;
+            }
+
+            header h1 {
+                font-size: 18px;
+            }
+
+            nav {
+                gap: 8px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .hero {
+                padding: 40px 16px;
+                min-height: 150px;
+                margin-bottom: 20px;
+            }
+
+            .content-section {
+                padding: 0 16px;
+            }
+
+            .accent-section {
+                padding: 20px 16px;
+            }
+
+            .accent-images {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .accent-text h3 {
+                font-size: 18px;
+            }
+
+            .accent-text p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============ HEADER ============ -->
+    <header>
+        <h1>Andika's <span class="accent">Portfolio</span></h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <li class="nav-item">
+                <button class="dropdown-btn">Leadership Roles ▼</button>
+                <div class="dropdown-content">
+                    <a href="leadership-secondary-1.html">Secondary 1</a>
+                    <a href="leadership-secondary-2.html">Secondary 2</a>
+                    <a href="leadership-secondary-3-4.html">Secondary 3 &amp; 4</a>
+                </div>
+            </li>
+            
+            
+        </nav>
+    </header>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero">
+        <h1>Secondary 2</h1>
+    </section>
+
+    <!-- ============ CONTENT ============ -->
+    <section class="content-section">
+        <!-- INTRO SECTION -->
+        <div class="section-intro">
+            <h3>Secondary 2 (2025)</h3>
+            <ul>
+              <li>Member of Language Development Centrer</li>
+              <li>Secretary of Boarder Councillor</li>
+              <li>HoD of Public Relations in Student Councillor</li>
+            </ul>
+        </div>
+
+        <!-- ACCENT SECTION 1 -->
+        <div class="accent-section">
+            <div class="accent-images">
+                <div class="accent-images-wrapper">
+                    <img src="./assets/melt25-1.png">
+                </div>
+                <div class="accent-images-wrapper">
+                    <img src="./assets/melt25-2.png">
+                </div>
+                
+            </div>
+            <div class="accent-text">
+                <h3>MELT 2025</h3>
+                <p><strong>Term 3</strong></p>
+                <p>As Class Chairperson, I led my classmates in preparing for the Interclass Competition. I coordinated discussions, delegated responsibilities, and encouraged everyone to contribute according to their strengths. Despite balancing academic commitments and varying schedules, we worked together effectively and maintained a strong team spirit throughout the preparation process.</p>
+            </div>
+        </div>
+
+        <!-- ACCENT SECTION 2 -->
+        <div class="accent-section reverse">
+            <div class="accent-images">
+                <div class="accent-images-wrapper">
+                    <img src="./assets/ramadan25-1.png">
+                </div>
+                <div class="accent-images-wrapper">
+                    <img src="./assets/ramadan25-2.png">
+                </div>
+            </div>
+            <div class="accent-text">
+                <h3>Safari Ramadan</h3>
+                <p><strong>Term 3</strong></p>
+                <p>As a member of the Language Development Centre, I participated in a movie-making project as one of the actors. I worked closely with the production team and fellow cast members to bring the story to life through rehearsals and filming sessions. Despite balancing academic responsibilities and extracurricular commitments, I remained dedicated to delivering my role effectively.</p>
+            </div>
+        </div>
+        <!-- ACCENT SECTION 3 -->
+        <div class="accent-section">
+            <div class="accent-images">
+                <div class="accent-images-wrapper">
+                    <img src="./assets/osama25-1.png">
+                </div>
+                <div class="accent-images-wrapper">
+                    <img src="./assets/osama25-2.png">
+                </div>
+                
+            </div>
+            <div class="accent-text">
+                <h3>Boarder's Outbound Activity</h3>
+                <p><strong>Term 3</strong></p>
+                <p>As a member of the IT Department of the Boarding Councillor, I prepared the technical aspects of the 11th Boarding School Graduation Ceremony. I was responsible for managing the presentation slides, audio system, and other multimedia materials to ensure the event ran smoothly. Through this experience, I contributed to the successful execution of a memorable ceremony for graduates, parents, and staff.</p>
+            </div>
+        </div>
+
+        
+        
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <p>© 2025 Andika's Leadership Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleCollapsible(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.collapsible-toggle');
+            
+            content.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+
+
+
+</body></html>
